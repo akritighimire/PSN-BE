@@ -1,7 +1,5 @@
 const JrrmDoctor = require("../../models/jrrm_doctor_schema");
 
-// Controller for adding a new doctor
-// Controller for adding a new doctor
 const addDoctor = async (req, res) => {
   try {
     const {
@@ -68,19 +66,19 @@ const getDoctors = async (req, res) => {
   }
 };
 
-// Controller for searching a doctor by fullName or nmcNumber
+// Controller for searching a doctor
 const searchDoctor = async (req, res) => {
   try {
     const { query } = req.query; // Get the search query from URL params
-    
+
     // Find doctors by matching any of the fields
     const doctors = await JrrmDoctor.find({
       $or: [
-        { fullName: { $regex: query, $options: "i" } },  // Case-insensitive search for fullName
-        { batch: { $regex: query, $options: "i" } },     // Case-insensitive search for batch
+        { fullName: { $regex: query, $options: "i" } }, // Case-insensitive search for fullName
+        { batch: { $regex: query, $options: "i" } }, // Case-insensitive search for batch
         { specialization: { $regex: query, $options: "i" } }, // Case-insensitive search for specialization
-        { nmcNumber: { $regex: query, $options: "i" } },  // Case-insensitive search for NMC No
-        { workingPlace: { $regex: query, $options: "i" } },  // Case-insensitive search for workplace
+        { nmcNumber: { $regex: query, $options: "i" } }, // Case-insensitive search for NMC No
+        { workingPlace: { $regex: query, $options: "i" } }, // Case-insensitive search for workplace
       ],
     });
 
@@ -94,7 +92,6 @@ const searchDoctor = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 // Controller for updating a doctor's details by ID
 const updateDoctor = async (req, res) => {

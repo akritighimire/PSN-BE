@@ -8,6 +8,7 @@ const passport = require("passport");
 const databaseConnection = require("./db_connection/db_connection");
 
 const app = express();
+app.use(cors());
 
 databaseConnection();
 
@@ -31,7 +32,6 @@ const adminRouter = require("./routes/adminauth_route");
 const doctorRouter = require("./routes/doctorauth_routes");
 const jrrmDoctorRouter = require("./routes/jrrmdoctor_routes");
 const userRouter = require("./routes/user_routes");
-
 
 app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
